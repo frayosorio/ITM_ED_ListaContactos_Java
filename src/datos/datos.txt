@@ -1,0 +1,3 @@
+Simón Tolomeo;6042345678;3215555444;Cl 25 # 43a-112;simon.tolomeo@hotmail.com
+Zoila Mesa de Billar;;3132445577;Cl 94 # 67-32;zoilita@gmail.com
+Alma Marcela Silva de Alegría;;;Cra 43b # 6-19;almasilva@gmail.com

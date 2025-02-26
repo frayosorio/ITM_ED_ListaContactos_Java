@@ -1,7 +1,6 @@
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -20,6 +19,8 @@ public class FrmContactos extends JFrame {
     private JButton btnOrdenar;
     private JToolBar tbContactos;
     private JTable tblContactos;
+
+    private Lista listaContactos = new Lista();
 
     public FrmContactos() {
         tbContactos = new JToolBar();
@@ -70,8 +71,7 @@ public class FrmContactos extends JFrame {
         });
         tbContactos.add(btnOrdenar);
 
-        String[] encabezados = new String[] { "Nombre", "Telefono", "Celular", "Direccion", "Correo" };
-        DefaultTableModel dtm = new DefaultTableModel(null, encabezados);
+        DefaultTableModel dtm = new DefaultTableModel(null, Lista.encabezados);
         tblContactos.setModel(dtm);
 
         JScrollPane spContactos = new JScrollPane(tblContactos);
@@ -79,7 +79,11 @@ public class FrmContactos extends JFrame {
         getContentPane().add(tbContactos, BorderLayout.NORTH);
         getContentPane().add(spContactos, BorderLayout.CENTER);
 
+        // Cargar los datos desde el archivo a la lista
+        String nombreArchivo = System.getProperty("user.dir") + "/src/datos/datos.txt";
 
+        listaContactos.desdeArchivo(nombreArchivo);
+        listaContactos.mostrar(tblContactos);
     }
 
     private void btnAgregarClick(ActionEvent evt) {
