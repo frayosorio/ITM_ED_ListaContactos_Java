@@ -1,6 +1,7 @@
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -87,9 +88,27 @@ public class FrmContactos extends JFrame {
     }
 
     private void btnAgregarClick(ActionEvent evt) {
+        listaContactos.agregar(new Nodo());
+        listaContactos.mostrar(tblContactos);
     }
 
     private void btnEliminarClick(ActionEvent evt) {
+        if (tblContactos.getSelectedRow() >= 0) {
+            String[] opciones = { "Sí", "No" };
+            int decision = JOptionPane.showOptionDialog(null, "Está seguro en eliminar el contacto?",
+                    "Confirmación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[1]);
+            if (decision == JOptionPane.YES_OPTION) {
+                listaContactos.eliminar(listaContactos.getNodo(tblContactos.getSelectedRow()));
+                listaContactos.mostrar(tblContactos);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el contacto a retirar");
+        }
     }
 
     private void btnGuardarClick(ActionEvent evt) {

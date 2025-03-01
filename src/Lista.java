@@ -29,6 +29,35 @@ public class Lista {
         }
     }
 
+    public void eliminar(Nodo n) {
+        if (n != null && cabeza != null) {
+            // buscar el nodo y su antecesor
+            Nodo antecesor = null;
+            Nodo apuntador = cabeza;
+            while (apuntador != null && apuntador != n) {
+                antecesor = apuntador;
+                apuntador = apuntador.siguiente;
+            }
+            if (apuntador != null) {
+                if (antecesor == null) {
+                    cabeza = cabeza.siguiente;
+                } else {
+                    antecesor.siguiente = apuntador.siguiente;
+                }
+            }
+        }
+    }
+
+    public Nodo getNodo(int posicion) {
+        int posicionActual = 0;
+        Nodo apuntador = cabeza;
+        while (apuntador != null && posicionActual != posicion) {
+            posicionActual++;
+            apuntador = apuntador.siguiente;
+        }
+        return apuntador != null && posicionActual == posicion ? apuntador : null;
+    }
+
     public void desdeArchivo(String nombreArchivo) {
         cabeza = null;
         BufferedReader br = Archivo.abrirArchivo(nombreArchivo);
@@ -69,11 +98,11 @@ public class Lista {
         Nodo apuntador = cabeza;
         while (apuntador != null) {
             fila++;
-            datos[fila][0]=apuntador.nombre;
-            datos[fila][1]=apuntador.telefono;
-            datos[fila][2]=apuntador.celular;
-            datos[fila][3]=apuntador.direccion;
-            datos[fila][4]=apuntador.correo;
+            datos[fila][0] = apuntador.nombre;
+            datos[fila][1] = apuntador.telefono;
+            datos[fila][2] = apuntador.celular;
+            datos[fila][3] = apuntador.direccion;
+            datos[fila][4] = apuntador.correo;
             apuntador = apuntador.siguiente;
         }
         DefaultTableModel dtm = new DefaultTableModel(datos, encabezados);
