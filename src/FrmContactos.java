@@ -22,6 +22,7 @@ public class FrmContactos extends JFrame {
     private JTable tblContactos;
 
     private Lista listaContactos = new Lista();
+    private String nombreArchivo;
 
     public FrmContactos() {
         tbContactos = new JToolBar();
@@ -81,7 +82,7 @@ public class FrmContactos extends JFrame {
         getContentPane().add(spContactos, BorderLayout.CENTER);
 
         // Cargar los datos desde el archivo a la lista
-        String nombreArchivo = System.getProperty("user.dir") + "/src/datos/datos.txt";
+        nombreArchivo = System.getProperty("user.dir") + "/src/datos/datos.txt";
 
         listaContactos.desdeArchivo(nombreArchivo);
         listaContactos.mostrar(tblContactos);
@@ -112,6 +113,11 @@ public class FrmContactos extends JFrame {
     }
 
     private void btnGuardarClick(ActionEvent evt) {
+        if (listaContactos.guardar(nombreArchivo)) {
+            JOptionPane.showMessageDialog(null, "Los datos fueron guardados con éxito");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudieron guardar los datos");
+        }
     }
 
     private void btnOrdenarClick(ActionEvent evt) {
