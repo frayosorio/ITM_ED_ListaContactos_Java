@@ -164,7 +164,7 @@ public class Lista {
     }
 
     private void intercambiar(Nodo a1, Nodo n1, Nodo a2, Nodo n2) {
-        if (cabeza != null && n1 != null && n2 != null && n1 != n2 && a2 != null) {
+        if (cabeza != null && n1 != null && n2 != null && n1 != n2) {
             if (a1 != null) {
                 a1.siguiente = n2;
             } else {
@@ -181,6 +181,27 @@ public class Lista {
             }
 
             n1.siguiente = t;
+        }
+    }
+
+    public void ordenar() {
+        Nodo ni = cabeza;
+        Nodo ai = null;
+        while (ni.siguiente != null) {
+            Nodo nj = ni.siguiente;
+            Nodo aj = ni;
+            while (nj != null) {
+                if (ni.nombre.compareTo(nj.nombre) > 0) {
+                    intercambiar(ai, ni, aj, nj);
+                    Nodo t = ni;
+                    ni = nj;
+                    nj = t;
+                }
+                aj = nj;
+                nj = nj.siguiente;
+            }
+            ai = ni;
+            ni = ni.siguiente;
         }
     }
 

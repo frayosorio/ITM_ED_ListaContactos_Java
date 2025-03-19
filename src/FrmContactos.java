@@ -121,6 +121,9 @@ public class FrmContactos extends JFrame {
     }
 
     private void btnOrdenarClick(ActionEvent evt) {
+
+        listaContactos.ordenar();
+        listaContactos.mostrar(tblContactos);
     }
 
 }
